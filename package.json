@@ -2,9 +2,9 @@
   "name": "map_react",
   "version": "1.0.0",
   "description": "map_react",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/plnttr1003/map_react/issues"
   },
-  "homepage": "https://github.com/plnttr1003/map_react#readme"
+  "homepage": "https://github.com/plnttr1003/map_react#readme",
+  "dependencies": {
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  }
 }
