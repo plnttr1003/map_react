@@ -1,0 +1,19 @@
+{
+  "name": "map_react",
+  "version": "1.0.0",
+  "description": "map_react",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plnttr1003/map_react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/plnttr1003/map_react/issues"
+  },
+  "homepage": "https://github.com/plnttr1003/map_react#readme"
+}
