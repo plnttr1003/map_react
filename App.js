@@ -5,43 +5,42 @@ var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			data: [
-				{id: 1, name: "Simon Bailey"},
-				{id: 2, name: "Masha Bailey"},
-				{id: 3, name: "Kasha Bailey"},
-				{id: 4, name: "Katya Bailey"},
-				{id: 5, name: "Ivan Bailey"},
-				{id: 6, name: "123 Bailey"},
-				{id: 7, name: "Sasha Bailey"},
-				{id: 8, name: "Simon8 Bailey"},
-				{id: 9, name: "Simon9 Bailey"},
-				{id: 10, name: "Simon10 Bailey"},
-				{id: 11, name: "Simon11 Bailey"},
-				{id: 12, name: "Simon12 Bailey"},
-				{id: 13, name: "Simon13 Bailey"},
-				{id: 14, name: "Simon14 Bailey"},
-				{id: 15, name: "Simon15 Bailey"},
-				{id: 16, name: "Simon16 Bailey"},
-				{id: 17, name: "Simon17 Bailey"},
-				{id: 18, name: "Petr Bailey"}
-			]}
-		}
-	render() {
-		let rows = this.state.data.map(person => {
-			return <PersonRow key={person.id} data={person} />
-		})
-		return <table>
-			<tbody>{rows}</tbody>
-		</table>
+		this.state = {items:['hello', 'world', 'click', 'me']};
+		this.handleAdd = this.handleAdd.bind(this);
 	}
-}
 
-const PersonRow = (props) => {
-	return <tr>
-		<td>{props.data.id}</td>
-		<td>{props.data.name}</td>
-	</tr>
+	handleAdd() {
+		var newItems = this.state.items.concat([
+			prompt('Enter some text')
+		]);
+		this.setState({items: newItems});
+	}
+
+	handleRemove(i) {
+		var newItems = this.state.items.slice();
+		newItems.splice(i, 1);
+		this.setState({items: newItems});
+	}
+
+	render() {
+		var items = this.state.items.map((item, i) => (
+			<div key={item} onClick={() => this.handleRemove(i)}>
+				{item}
+			</div>
+		));
+
+		return (
+			<div>
+				<button onClick={this.handleAdd}>Add Item</button>
+				<ReactCSSTransitionGroup
+					transitionName="example"
+					transitionEnterTimeout={500}
+					transitionLeaveTimeout={300}>
+					{items}
+				</ReactCSSTransitionGroup>
+			</div>
+		);
+	}
 }
 
 export default App
