@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-class App extends React.Component {
-	constructor(props) {
+
+let Mixin = InnerComponent => class extends React.Component {
+	constructor() {
 	  super();
 	  this.state = {val: 0};
 	  this.update = this.update.bind(this);
@@ -10,39 +10,55 @@ class App extends React.Component {
 		this.setState({val: this.state.val + 1})
 	}
 	componentWillMount(){
-		console.log('mounting');
-	}
-	render() {
-		console.log('rendering!');
-		return <button onClick={this.update}>{this.state.val}</button>
+		console.log('will mount');
 	}
 	componentDidMount(){
 		console.log('mounted');
 	}
-	componentWillUnmount(){
-		console.log('bye!');
+	render() {
+		return <InnerComponent
+			update = {this.update}
+			{...this.state}
+			{...this.props}
+		/>
 	}
 }
 
-class Wrapper extends React.Component {
-	constructor(){
-		super();
+const Button = (props) => <button
+													onClick={props.update}>
+													{props.txt} - {props.val}
+													</button>
+
+const Label = (props) => <label
+													onMouseMove={props.update}>
+													{props.txt} - {props.val}
+													</label>
+
+let ButtonMixed = Mixin(Button)
+let LabelMixed = Mixin(Label)
+
+
+class App extends React.Component {
+	constructor() {
+	  super();
+	  this.state = {val: 0};
+	  this.update = this.update.bind(this);
 	}
-	mount(){
-		ReactDOM.render(<App/>,document.getElementById('a'))
+	update() {
+		this.setState({val: this.state.val + 1})
 	}
-	unmount(){
-		ReactDOM.unmountComponentAtNode(document.getElementById('a'))
+	componentWillMount(){
+		console.log('will mount');
 	}
-  render(){
-    return(
-    	<div>
-    		<button onClick={this.mount.bind(this)}>Mount</button>
-    		<button onClick={this.unmount.bind(this)}>Unmount</button>
-    		<div id="a"></div>
-    	</div>
-    )
-  }
+	render() {
+		return (
+			<div>
+				<ButtonMixed txt="Button" />
+				<LabelMixed txt="Label" />
+			</div>
+		);
+	}
 }
 
-export default Wrapper
+
+export default App
