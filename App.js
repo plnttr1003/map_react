@@ -1,72 +1,44 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			red: 0
-		};
-		this.update = this.update.bind(this)
-	}
-	update(e) {
-		this.setState({
-			red: ReactDOM.findDOMNode(this.refs.red.refs.inp).value
-		})
-	}
-	render() {
-		return (
-			<div>
-				<NumInput
-					ref="red"
-					min={0}
-					max={255}
-					step={0.1}
-					val={+this.state.red}
-					type="range"
-					/*type="number"*/
-					label="Red"
-					update={this.update} />
-			</div>
-		);
-	}
-}
-
-class NumInput extends React.Component {
-	render(){
-		let label = this.props.label !== '' ?
-			<label>{this.props.label} - {this.props.val}</label> : ''
-				return (
-					<div>
-						<input ref="inp"
-							type={this.props.type}
-							min={this.props.min}
-							max={this.props.max}
-							step={this.props.step}
-							defaultValue={this.props.val}
-							onChange={this.props.update} />
-							{label}
-					</div>
-				);
-			}
+			data: [
+				{id: 1, name: "Simon Bailey"},
+				{id: 2, name: "Masha Bailey"},
+				{id: 3, name: "Kasha Bailey"},
+				{id: 4, name: "Katya Bailey"},
+				{id: 5, name: "Ivan Bailey"},
+				{id: 6, name: "123 Bailey"},
+				{id: 7, name: "Sasha Bailey"},
+				{id: 8, name: "Simon8 Bailey"},
+				{id: 9, name: "Simon9 Bailey"},
+				{id: 10, name: "Simon10 Bailey"},
+				{id: 11, name: "Simon11 Bailey"},
+				{id: 12, name: "Simon12 Bailey"},
+				{id: 13, name: "Simon13 Bailey"},
+				{id: 14, name: "Simon14 Bailey"},
+				{id: 15, name: "Simon15 Bailey"},
+				{id: 16, name: "Simon16 Bailey"},
+				{id: 17, name: "Simon17 Bailey"},
+				{id: 18, name: "Petr Bailey"}
+			]}
 		}
-
-NumInput.propTypes = {
-	min: React.PropTypes.number,
-	max: React.PropTypes.number,
-	step: React.PropTypes.number,
-	val: React.PropTypes.number,
-	label: React.PropTypes.string,
-	update: React.PropTypes.func.isRequired,
-	type: React.PropTypes.oneOf(['number','range'])
+	render() {
+		let rows = this.state.data.map(person => {
+			return <PersonRow key={person.id} data={person} />
+		})
+		return <table>
+			<tbody>{rows}</tbody>
+		</table>
+	}
 }
 
-NumInput.defaultProps = {
-	min: 0,
-	max: 0,
-	step: 1,
-	val: 0,
-	label: '',
-	type: 'range'
+const PersonRow = (props) => {
+	return <tr>
+		<td>{props.data.id}</td>
+		<td>{props.data.name}</td>
+	</tr>
 }
 
 export default App
