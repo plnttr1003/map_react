@@ -1,4 +1,7 @@
 import React from 'react';
+
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+
 class App extends React.Component {
 	constructor(props) {
 		super(props);
